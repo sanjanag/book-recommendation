@@ -20,17 +20,19 @@ We used the Goodreads dataset, which was collected from goodreads.com in 2017. T
 
 ### Data Exploration
 
-<img src="images/regression/avg_rating.png" alt="hi" class="inline"/>
+![](images/regression/avg_rating.png)
 
-<img src="images/regression/correlation.png" alt="hi" class="inline"/>
+![](images/regression/correlation.png)
 
-<img src="images/regression/pairplot.png" alt="hi" class="inline"/>
+![](images/regression/correlation.png)
+
 
 ## Supervised Task - Predicting average rating of a book
  
 ### Feature Selection
 
-<img src="images/regression/lang_vs_rating.png" alt="hi" class="inline"/>
+![](images/regression/lang_vs_rating.png)
+*image_caption*
 
 
 ### Algorithms
