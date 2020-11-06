@@ -8,7 +8,12 @@ Goodreads is a social cataloging website where users can review books, maintain 
 ## Problem Definition
 We have a set of books *B* with attributes of each book like description, author, number of pages and so on. We also have an interaction matrix *I*, where *I*[*u*][*b*] entry tells what rating user u gave to book *b*. Using these two sets of information we aim to solve the following tasks.
 - Given a book *b* with its attributes, predict it's average rating in the range of 0 to 5.
-- Given a user's prior interaction with the books i.e. *I*[*u*], suggest top *n* recommendations for that user. 
+- Given a user's prior interaction with the books i.e. *I*[*u*], suggest top *n* recommendations for that user.
+
+## Data Collection
+
+<img src="images/regression/correlation.png" alt="hi" class="inline"/>
+ 
 
 ## Methods
 ### Dataset
