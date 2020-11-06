@@ -12,8 +12,20 @@ We have a set of books *B* with attributes of each book like description, author
 
 ## Data Collection
 
+
+
+
+## Data Exploration
+
+<img src="images/regression/avg_rating.png" alt="hi" class="inline"/>
+
 <img src="images/regression/correlation.png" alt="hi" class="inline"/>
+
+<img src="images/regression/pairplot.png" alt="hi" class="inline"/>
  
+## Feature Selection
+
+<img src="images/regression/lang_vs_rating.png" alt="hi" class="inline"/>
 
 ## Methods
 ### Dataset
