@@ -33,7 +33,7 @@ We used the Goodreads dataset, which was collected from goodreads.com in 2017. T
 <img src="images/regression/lang_vs_rating.png" alt="hi" class="inline"/>
 
 
-## Algorithms
+### Algorithms
 
 1. Linear Regression
 Based on the correlation values observed during the feature selection task, we chose author name, number of pages, genre, and the age of the book as features for training our linear regression model. The age of the book was calculated as (2020 - publication year). To convert the textual features like genre and author name into numerical features so that a model could be trained on them, we used the label encoder from scikit-learn.  After this, we made a train-test split of 80%-20%, and then trained the linear regression model on the data using scikit-learn. The performance observed is showed in the results section.
@@ -41,7 +41,7 @@ Based on the correlation values observed during the feature selection task, we c
 2. Neural Network
 
 
-## Results
+### Results
 All the metrics resulted are evaluated on the test set.
 
 | Model      | MAE | MSE | RMSE | R-Square |
