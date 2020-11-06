@@ -10,35 +10,47 @@ We have a set of books *B* with attributes of each book like description, author
 - Given a book *b* with its attributes, predict it's average rating in the range of 0 to 5.
 - Given a user's prior interaction with the books i.e. *I*[*u*], suggest top *n* recommendations for that user.
 
-## Data Collection
+## Dataset
+For our project, we will be using a Goodreads dataset released by UCSD that was collected in late 2017 by scraping data off of the public shelves of users. The main dataset has data of about 2,300,000 books and 900,000 users. The books are divided into different genres such as Children, Young Adult, Comics, Fantasy, History, etc. Since the original dataset is very large, we will be using a subset of books from each genre dataset. For recommendations, we will be using the user-book interaction dataset, which contains information such as user ID, book ID, rating score, and book review.
+
+
+### Data Collection
 
 
 
 
-## Data Exploration
+### Data Exploration
 
 <img src="images/regression/avg_rating.png" alt="hi" class="inline"/>
 
 <img src="images/regression/correlation.png" alt="hi" class="inline"/>
 
 <img src="images/regression/pairplot.png" alt="hi" class="inline"/>
+
+## Supervised Task - Predicting average rating of a book
  
-## Feature Selection
+### Feature Selection
 
 <img src="images/regression/lang_vs_rating.png" alt="hi" class="inline"/>
 
-## Methods
-### Dataset
-For our project, we will be using a Goodreads dataset released by UCSD that was collected in late 2017 by scraping data off of the public shelves of users. The main dataset has data of about 2,300,000 books and 900,000 users. The books are divided into different genres such as Children, Young Adult, Comics, Fantasy, History, etc. Since the original dataset is very large, we will be using a subset of books from each genre dataset. For recommendations, we will be using the user-book interaction dataset, which contains information such as user ID, book ID, rating score, and book review.
 
-### Algorithms
-- **Supervised** <br>
-For predicting ratings we plan to use a supervised approach. We plan to use linear regression as a baseline [1] and then move on to neural networks [2].
+## Algorithms
 
-| Model      | MAE | MSE | RMSE | R-Square |
+1. Linear Regression
+
+2. Neural Network
+
+
+## Results
+
+| Model      | MAE | MSE | RMSE | R-Square (test) |
 | ----------- | ------- | ------- | ------- | ------- |
-| Linear Regression |        | | | |
+| Linear Regression |  0.275 | 0.127  | 0.356  | 0.818 |
 | Neural Network |         | | | |
+
+
+
+## Remaining part
 
 - **Unsupervised** <br>
 For the task of recommending books to users, we will be experimenting with unsupervised approaches in the following two paradigms.
