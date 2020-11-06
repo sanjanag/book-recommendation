@@ -35,6 +35,11 @@ For our project, we will be using a Goodreads dataset released by UCSD that was 
 - **Supervised** <br>
 For predicting ratings we plan to use a supervised approach. We plan to use linear regression as a baseline [1] and then move on to neural networks [2].
 
+| Model      | MAE | MSE | RMSE | R-Square |
+| ----------- | ------- | ------- | ------- | ------- |
+| Linear Regression |        | | | |
+| Neural Network |         | | | |
+
 - **Unsupervised** <br>
 For the task of recommending books to users, we will be experimenting with unsupervised approaches in the following two paradigms.
     1. **Content-based filtering** <br>
