@@ -15,8 +15,7 @@ For our project, we will be using a Goodreads dataset released by UCSD that was 
 
 
 ### Data Collection
-
-
+We used the Goodreads dataset, which was collected from goodreads.com in 2017. This dataset consisted of csv files for different genres and had information about the author, title, rating, reviews, publications details. We read each csv file and added a new column to account for the genre. We then selected 1000 books from each genre and combined all the individual dataframes into one csv file consisting of 8000 books. 
 
 
 ### Data Exploration
@@ -37,13 +36,15 @@ For our project, we will be using a Goodreads dataset released by UCSD that was 
 ## Algorithms
 
 1. Linear Regression
+Based on the correlation values observed during the feature selection task, we chose author name, number of pages, genre, and the age of the book as features for training our linear regression model. The age of the book was calculated as (2020 - publication year). To convert the textual features like genre and author name into numerical features so that a model could be trained on them, we used the label encoder from scikit-learn.  After this, we made a train-test split of 80%-20%, and then trained the linear regression model on the data using scikit-learn. The performance observed is showed in the results section.
 
 2. Neural Network
 
 
 ## Results
+All the metrics resulted are evaluated on the test set.
 
-| Model      | MAE | MSE | RMSE | R-Square (test) |
+| Model      | MAE | MSE | RMSE | R-Square |
 | ----------- | ------- | ------- | ------- | ------- |
 | Linear Regression |  0.275 | 0.127  | 0.356  | 0.818 |
 | Neural Network |         | | | |
