@@ -21,18 +21,24 @@ We used the Goodreads dataset, which was collected from goodreads.com in 2017. T
 ### Data Exploration
 
 ![](images/regression/avg_rating.png)
+<br>
+*Figure 1: Distribution of Ratings*
 
 ![](images/regression/correlation.png)
+<br>
+*Figure 2: Heatmap of correlation between numerical features*
 
 ![](images/regression/correlation.png)
-
+<br>
+*Figure 3: Plot of correlation between numerical features*
 
 ## Supervised Task - Predicting average rating of a book
  
 ### Feature Selection
 
 ![](images/regression/lang_vs_rating.png)
-*image_caption*
+<br>
+*Figure 4: Distribution of Average Ratings across languages*
 
 
 ### Algorithms
