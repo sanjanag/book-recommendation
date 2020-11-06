@@ -11,55 +11,73 @@ We have a set of books *B* with attributes of each book like description, author
 - Given a user's prior interaction with the books i.e. *I*[*u*], suggest top *n* recommendations for that user.
 
 ## Dataset
-For our project, we will be using a Goodreads dataset released by UCSD that was collected in late 2017 by scraping data off of the public shelves of users. The main dataset has data of about 2,300,000 books and 900,000 users. The books are divided into different genres such as Children, Young Adult, Comics, Fantasy, History, etc. Since the original dataset is very large, we will be using a subset of books from each genre dataset. For recommendations, we will be using the user-book interaction dataset, which contains information such as user ID, book ID, rating score, and book review.
+For our project, we will be using a [Goodreads dataset](https://sites.google.com/eng.ucsd.edu/ucsdbookgraph/home)  released by UCSD that was collected in late 2017 by scraping data off of the public shelves of users. The main dataset has data of about 2,300,000 books and 900,000 users. The books are divided into different genres such as Children, Young Adult, Comics, Fantasy, History, etc. Since the original dataset is very large, we will be using a subset of books from each genre dataset. For recommendations, we will be using the user-book interaction dataset, which contains information such as user ID, book ID, rating score, and book review.
 
 
 ### Data Collection
-We used the Goodreads dataset, which was collected from goodreads.com in 2017. This dataset consisted of csv files for different genres and had information about the author, title, rating, reviews, publications details. We read each csv file and added a new column to account for the genre. We then selected 1000 books from each genre and combined all the individual dataframes into one csv file consisting of 8000 books. 
+We used the Goodreads dataset, which was collected from goodreads.com in 2017. This dataset consisted of csv files for different genres and had information about the author, title, rating, reviews, publications details. We read each csv file and added a new column to account for the genre. We then selected 1000 books from each genre and combined all the individual dataframes into one csv file consisting of 8000 books.
 
 
-### Data Exploration
 
-![](images/regression/avg_rating.png)
+### Feature Selection
+
+The dataset provided us with 30 columns which covered a comprehensive range of information such as basic information (title, author, rating, etc.), meta information (isbn, edition information, kindle identifier, format, etc.). The following table lists all the information the dataset provides, along with the data type in which the information is available to us. 
+
+![](images/regression/features.png)
 <br>
-*Figure 1: Distribution of Ratings*
+*Figure 1: Table of all features*
+
+We want to find the relevant features that affect the target variable (average rating) and need to be included in the model. From these 30 columns, it is easy to identify and remove some of the obvious columns which are not necessary (such as urls, image links, work_id, edition information, etc.) from the data because these columns do not help us predict the average rating of the book. We chose to draw a heatmap for the numerical features of the dataset to find a strong positive or a strong negative correlation between features, especially if any feature had a strong/weak correlation with average rating. We plot this heatmap. Based on the heatmap shown, we decided the average rating did not correlate with any of the numerical columns. So, we decided to focus on the features such as Author and Genre, and then we included more features that either existed in the dataset (e.g. number of pages) or were synthesized (e.g. a ranked ordering of the books based on language of the book). 
 
 ![](images/regression/correlation.png)
 <br>
 *Figure 2: Heatmap of correlation between numerical features*
 
-![](images/regression/correlation.png)
+![](images/regression/pairplot.png)
 <br>
 *Figure 3: Plot of correlation between numerical features*
 
-## Supervised Task - Predicting average rating of a book
- 
-### Feature Selection
+One of the features we explored was language code. We essentially wanted to find the spread of books across different languages.
+This was the spread for the books across different languages - English - 77.2%, English-US - 12.4 %, Spanish - 3.1%, English-GB - 2.5%, German - 1.7% and Others - 3.1%. Although the dataset contains 51 languages, we see that the top 5 languages cover well over 95% of all the books in it. Our reduced dataset covered this spread and did not keep only books in certain languages. We plot a diagram for Languages vs the Average Rating for the books. We found that for the dataset, using the languages features did not give any marginal improvement in the regression model.
 
 ![](images/regression/lang_vs_rating.png)
 <br>
 *Figure 4: Distribution of Average Ratings across languages*
 
+After choosing the relevant features, we removed data points that were incomplete (NaNs)  We also removed any outliers from these features, for example, the number of pages, any entries greater than 1000 were removed, as they were beyond the third quartile, which we checked using a boxplot. This resulted in 5331 unique data points which were used in the models described below. We visualized the data by looking at the distribution of ratings for these data points as shown in the figure below.
 
-### Algorithms
+![](images/regression/avg_rating.png)
+<br>
+*Figure 1: Distribution of Ratings*
 
-1. Linear Regression
+
+
+## Supervised Task - Predicting average rating of a book
+ 
+### Methods
+
+1. Linear Regression<br>
 Based on the correlation values observed during the feature selection task, we chose author name, number of pages, genre, and the age of the book as features for training our linear regression model. The age of the book was calculated as (2020 - publication year). To convert the textual features like genre and author name into numerical features so that a model could be trained on them, we used the label encoder from scikit-learn.  After this, we made a train-test split of 80%-20%, and then trained the linear regression model on the data using scikit-learn. The performance observed is showed in the results section.
 
-2. Neural Network
+2. Neural Network<br>
+For the neural network implementation, we chose the same features (author name, number of pages, genre, and the age of the book) as features for training our pytorch neural network model. The age of the book was calculated as (2020 - publication year). To convert the textual features like genre and author name into numerical features so that a model could be trained on them, we used the label encoder from scikit-learn to get a one-hot encoding of all the authors and genres. We also normalized the age and number of pages to be between 0 and 1 for both categories. This created 4395 input parameters total. After this, we made a train-test split of 90%-10%, and then trained the neural network with two hidden layers, the first with 300 hidden nodes, and the second with 100 hidden nodes, using ReLU for our activation function. The last layer was a linear layer from the 100 hidden nodes in order to create one rating calculation. For our hyperparameters, we used gradient descent instead of stochastic gradient descent, with our learning rate=0.01 and 100 epochs. The performance observed is given below.
 
 
-### Results
+## Results
 All the metrics resulted are evaluated on the test set.
 
 | Model      | MAE | MSE | RMSE | R-Square |
 | ----------- | ------- | ------- | ------- | ------- |
 | Linear Regression |  0.275 | 0.127  | 0.356  | 0.818 |
-| Neural Network |         | | | |
+| Neural Network |  0.291 | 0.145| 0.381 | 
+
+## Discussion
+
+Based on the tables shown above, we can see that the linear regression model is able to perform slightly better in terms of the RMSE. RMSE values close 0.35 is not bad considering the range of values for the possible rating (1-5). Moreover, the neural network we implemented was basic (1 hidden layer with limited number of hidden nodes). We plan to further improve on this by experimenting with the parameters and the structure of the network. Also, we plan to perform unsupervised learning, as mentioned in the proposal, to build recommendations for the user. 
 
 
 
-## Remaining part
+## Remaining part - To Do
 
 - **Unsupervised** <br>
 For the task of recommending books to users, we will be experimenting with unsupervised approaches in the following two paradigms.
