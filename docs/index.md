@@ -53,7 +53,7 @@ After choosing the relevant features, we removed data points that were incomplet
 
 
 ## Supervised Task - Predicting average rating of a book
- 
+
 ### Methods
 
 1. Linear Regression<br>
@@ -78,19 +78,23 @@ Based on the tables shown above, we can see that the linear regression model is 
 
 ## Unsupervised Task - Book recommendation
 
+
+### Dataset Construction
+For the purpose of recommendations, we use the interactions dataset of the above mentioned dataset. It contains the information how each user rated the book they read. After reducing the size of the dataset and performing some cleaning, we have in total 1000 users and 11122 books. We then did a 80:20 split on this dataset for evaluation.
+
+![](images/recommendation/avg_rating_vs_count.png)
+
 ### Methods
 
 For the task of recommending books to users, we experimented with following two paradigms.
-    1. **Content-based filtering** <br>
+1. **Content-based filtering** <br>
     In content-based filtering, we recommend new books based on user's previously read books. For this, we construct a TF-IDF matrix of size B x W where B is the number of books and W is number of words. From there, we compute a similarity factor
 between books x and y using cosine similarity. We then use these similarities to predict ratings of unread book according to the following formula and recommend them according to the predicted ratings.
 ![](images/recommendation/calc.png)
 
-    2. **Collaborative filtering** <br>
+ 2. **Collaborative filtering** <br>
 Collaborative filtering makes recommendations based on other users’ ratings along with the user in question. We plan to use matrix factorization for this approach.
 
-### Experiments
-We plan to assess both traditional and neural network classifiers, to determine the best model for our predicting ratings. We also aim to build an perform an ablation study on metadata features to see if they enhance the predictions in addition to text. For the recommnedations, we plan to contrast content filtering and collaborative filtering methods.
 
 ### Evaluation Metrics
 We will use Root-Mean-Squared-Error (RMSE) to determine the accuracy of our rating prediction algorithm, and Normalized-Discounted-Cumulative-Gain (nDCG) to evaluate the recommendations.
