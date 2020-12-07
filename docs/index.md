@@ -114,9 +114,9 @@ Following figure illustrates recommended books for one of our users.
 ### Discussion
 Based on the above results, we can see that content-based filtering performs better compared to collaborative filtering. This points to the case that for book recommendation previously read books are a stronger indicator than similar users. Also, we only have a 1000 users and since collaborative filtering relies on user book interactions, the data might not be sufficient to achieve good results. 
 
-Following figure illustrates recommended books for one of our users using content-based filtering.
+Following figure illustrates recommended books for one of our users using content-based filtering. We can observe from user's previously read books that the user is interested in children, fantasy and romance genre. The recommended books are indeed from the same genre with elements from read books. We could also recommend for each genre in future to make better recommendations. 
+
 ![](images/recommendation/reco.png)
-We can observe from user's previously read books that the user is interested in children, fantasy and romance genre. The recommended books are indeed from the same genre with elements from read books. We could also recommend for each genre in future to make better recommendations. 
 
 
 
