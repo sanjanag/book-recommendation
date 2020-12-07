@@ -52,10 +52,6 @@ After choosing the relevant features, we removed data points that were incomplet
 <br>
 *Figure 5: Distribution of Ratings*
 
-![](images/regression/averagerating_count.png)
-<br>
-*Figure 6: Count of Average Ratings*
-
 
  
 ### Methods
@@ -87,7 +83,7 @@ Based on the tables shown above, we can see that the linear regression model is 
 ## Unsupervised Task - Recommendation System
 For the task of recommending books to users, we experimented with following two paradigms.
 ### Data Collection
-For the purpose of recommendations, we use the interactions dataset of the above mentioned dataset. It contains the information how each user rated the book they read. After reducing the size of the dataset and performing some cleaning, we have in total 1000 users and 11122 books. We then did a 80:20 split on this dataset for evaluation.
+For the purpose of recommendations, we use the interactions dataset of the above mentioned dataset. It contains the information how each user rated the book they read. After reducing the size of the dataset and performing some cleaning, we have in total 1000 users and 11122 books. We then did a 80:20 split on this dataset for evaluation. The following plot shows the distribution of average rating across number of ratings received for a book.
 
 ![](images/recommendation/avg_rating_vs_count.png)
 
