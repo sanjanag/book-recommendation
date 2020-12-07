@@ -110,7 +110,7 @@ We used Average RMSE as an evaluation metric, average acrossed users. The reason
 | Content-based filtering |  0.78 |
 | Collaborative filtering |  1.03 | 
 
-
+![](images/recommendation/reco.png)
 
 ## References
 
