@@ -14,6 +14,7 @@ We have a set of books *B* with attributes of each book like description, author
 ## Dataset
 For our project, we will be using a [Goodreads dataset](https://sites.google.com/eng.ucsd.edu/ucsdbookgraph/home)  released by UCSD that was collected in late 2017 by scraping data off of the public shelves of users. The main dataset has data of about 2,300,000 books and 900,000 users. The books are divided into different genres such as Children, Young Adult, Comics, Fantasy, History, etc. Since the original dataset is very large, we will be using a subset of books from each genre dataset. For recommendations, we will be using the user-book interaction dataset, which contains information such as user ID, book ID, rating score, and book review.
 
+## Supervised Task - Predicting average rating of a book
 
 ### Data Collection
 We used the Goodreads dataset, which was collected from goodreads.com in 2017. This dataset consisted of csv files for different genres and had information about the author, title, rating, reviews, publications details. We read each csv file and added a new column to account for the genre. We then selected 1000 books from each genre and combined all the individual dataframes into one csv file consisting of 8000 books.
@@ -56,22 +57,19 @@ After choosing the relevant features, we removed data points that were incomplet
 *Figure 6: Count of Average Ratings*
 
 
-
-
-
  
-## Methods
-### Supervised Task - Predicting average rating of a book
+### Methods
 
-1. Linear Regression<br>
+
+1. **Linear Regression**<br>
 Based on the correlation values observed during the feature selection task, we chose author name, number of pages, genre, and the age of the book as features for training our linear regression model. The age of the book was calculated as (2020 - publication year). To convert the textual features like genre and author name into numerical features so that a model could be trained on them, we used the label encoder from scikit-learn.  After this, we made a train-test split of 80%-20%, and then trained the linear regression model on the data using scikit-learn. The performance observed is showed in the results section.
 
-2. Neural Network<br>
+2. **Neural Network**<br>
 For the neural network implementation, we chose the same features (author name, number of pages, genre, and the age of the book) as features for training our pytorch neural network model. The age of the book was calculated as (2020 - publication year). To convert the textual features like genre and author name into numerical features so that a model could be trained on them, we used the label encoder from scikit-learn to get a one-hot encoding of all the authors and genres. We also normalized the age and number of pages to be between 0 and 1 for both categories. This created 4395 input parameters total. After this, we made a train-test split of 90%-10%, and then trained the neural network with two hidden layers, the first with 300 hidden nodes, and the second with 100 hidden nodes, using ReLU for our activation function. The last layer was a linear layer from the 100 hidden nodes in order to create one rating calculation. For our hyperparameters, we used gradient descent instead of stochastic gradient descent, with our learning rate=0.01 and 100 epochs. The performance observed is given below.
 <br>
-After the midterm report, we took a more in-depth look on improving the performance of our neural network system. We tried different neural network structures with varying number of layers between 2-4 hidden layers. We also added more parameters, including is_ebook (a boolean) and square root of age and square root of number of pages. We also tuned the learning hyperparameter alpha and the total number of training epochs. Doing all these things resulted in an improvement in our Root Mean Squared Error Metric from 0.381 to 0.339.
 
-## Results
+
+### Results
 All the metrics resulted are evaluated on the test set.
 
 | Model      | MAE | MSE | RMSE | R-Square |
@@ -79,30 +77,45 @@ All the metrics resulted are evaluated on the test set.
 | Linear Regression |  0.275 | 0.127  | 0.356  | 0.818 |
 | Neural Network |  0.291 | 0.145| 0.381 | 
 
-The performance of the collaborative filtering algorithm is shown below
-
-## Discussion
-
-Based on the tables shown above, we can see that the linear regression model is able to perform slightly better in terms of the RMSE. RMSE values close 0.35 is not bad considering the range of values for the possible rating (1-5). Moreover, the neural network we implemented was basic (1 hidden layer with limited number of hidden nodes). We plan to further improve on this by experimenting with the parameters and the structure of the network. Also, we plan to perform unsupervised learning, as mentioned in the proposal, to build recommendations for the user. 
 
 
+### Discussion
 
-### Unsupervised Task - Recommendation System
+Based on the tables shown above, we can see that the linear regression model is able to perform slightly better in terms of the RMSE. RMSE values close 0.35 is not bad considering the range of values for the possible rating (1-5). Moreover, the neural network we implemented was basic (1 hidden layer with limited number of hidden nodes). After the midterm report, we took a more in-depth look on improving the performance of our neural network system. We tried different neural network structures with varying number of layers between 2-4 hidden layers. We also added more parameters, including is_ebook (a boolean) and square root of age and square root of number of pages. We also tuned the learning hyperparameter alpha and the total number of training epochs. Doing all these things resulted in an improvement in our Root Mean Squared Error Metric from 0.381 to 0.339.
+
+
+
+
+## Unsupervised Task - Recommendation System
 For the task of recommending books to users, we experimented with following two paradigms.
+### Data Collection
+For the purpose of recommendations, we use the interactions dataset of the above mentioned dataset. It contains the information how each user rated the book they read. After reducing the size of the dataset and performing some cleaning, we have in total 1000 users and 11122 books. We then did a 80:20 split on this dataset for evaluation.
 
-   
-1. Content Based
+![](images/recommendation/avg_rating_vs_count.png)
+
+### Methods   
+1. **Content Based**<br>
  In content-based filtering, we recommend new books based on user's previously read books. For this, we construct a TF-IDF matrix of size B x W where B is the number of books and W is number of words. From there, we compute a similarity factor
 between books x and y using cosine similarity. We then use these similarities to predict ratings of unread book according to the following formula and recommend them according to the predicted ratings.
 ![](images/recommendation/calc.png)
 <br>
 
-2. Collaborative Filtering
+2. **Collaborative Filtering**<br>
 Collaborative filtering makes recommendations based on other users’ ratings along with the user in question. We decided to use Matrix Factorization to build a map of the user and the item (books in our case). One popular method to perform matrix factorization is SVD. However, SVD is best suited to handle incomplete data in the user-rating matrix. Therefore, we decided to use an alternative approach called Alternating Least square (ALS).  We first split the data into training and test sets, with the user_id, book_id, and rating as the features. We performed hyperparameter tuning on the following parameters to the ALS model: rank, max iterations, and regularization). We performed 5 fold cross validation using this parameter grid and fitted the model on the training data. The ALS model was then used to predict the ratings for books for each user in the test set (these books were assumed to be unread to evaluate the performance of the algorithm). The table in the result section displays the performance of our algorithm
 
 
-![](images/recommendation/reco.png)
 
+
+## Results
+We used Average RMSE as an evaluation metric, average acrossed users. The reason for this is that the dataset is too sparse to get meaningful recall and precision values. Therefore, we chose RMSE for empirical evaluation and we will show qualitative results further below.
+
+| Model      | Avergae RMSE |
+| ----------- | ------- |
+| Content-based filtering |  0.78 |
+| Collaborative filtering |  1.03 | 
+
+
+![](images/recommendation/reco.png)
 ## References
 
 [1] Hsu PY., Shen YH., Xie XA. (2014) Predicting Movies User Ratings with Imdb Attributes. In: Miao D., Pedrycz W., Ślȩzak D., Peters G., Hu Q., Wang R. (eds) Rough Sets and Knowledge Technology. RSKT 2014. Lecture Notes in Computer Science, vol 8818. Springer, Cham.  <br>
