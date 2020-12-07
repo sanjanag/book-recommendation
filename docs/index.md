@@ -101,7 +101,11 @@ between books x and y using cosine similarity. We then use these similarities to
 2. **Collaborative Filtering** <br>
 Collaborative filtering makes recommendations based on other users’ ratings along with the user in question. We decided to use Matrix Factorization to build a map of the user and the item (books in our case). One popular method to perform matrix factorization is SVD. However, SVD is best suited to handle incomplete data in the user-rating matrix. Therefore, we decided to use an alternative approach called Alternating Least square (ALS).  We first split the data into training and test sets, with the user_id, book_id, and rating as the features. We performed hyperparameter tuning on the following parameters to the ALS model: rank, max iterations, and regularization). We performed 5 fold cross validation using this parameter grid and fitted the model on the training data. The ALS model was then used to predict the ratings for books for each user in the test set (these books were assumed to be unread to evaluate the performance of the algorithm). The table in the result section displays the performance of our algorithm
 
-| Model      | RMSE |
+
+## Results
+We used Average RMSE as an evaluation metric, average acrossed users. The reason for this is that the dataset is too sparse to get meaningful recall and precision values. Therefore, we chose RMSE for empirical evaluation and we will show qualitative results further below.
+
+| Model      | Avergae RMSE |
 | ----------- | ------- |
 | Content-based filtering |  0.78 |
 | Collaborative filtering |  1.03 | 
