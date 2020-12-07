@@ -52,6 +52,7 @@ After choosing the relevant features, we removed data points that were incomplet
 *Figure 5: Distribution of Ratings*
 
 ![](images/regression/averagerating_count.png)
+<br>
 *Figure 6: Count of Average Ratings*
 
 
