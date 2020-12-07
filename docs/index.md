@@ -71,20 +71,6 @@ For the neural network implementation, we chose the same features (author name, 
 <br>
 After the midterm report, we took a more in-depth look on improving the performance of our neural network system. We tried different neural network structures with varying number of layers between 2-4 hidden layers. We also added more parameters, including is_ebook (a boolean) and square root of age and square root of number of pages. We also tuned the learning hyperparameter alpha and the total number of training epochs. Doing all these things resulted in an improvement in our Root Mean Squared Error Metric from 0.381 to 0.339.
 
-### Unsupervised Task - Recommendation System
-For the task of recommending books to users, we experimented with following two paradigms.
-
-   
-1. Content Based
- In content-based filtering, we recommend new books based on user's previously read books. For this, we construct a TF-IDF matrix of size B x W where B is the number of books and W is number of words. From there, we compute a similarity factor
-between books x and y using cosine similarity. We then use these similarities to predict ratings of unread book according to the following formula and recommend them according to the predicted ratings.
-![](images/recommendation/calc.png)
-<br>
-
-2. Collaborative Filtering
-Collaborative filtering makes recommendations based on other users’ ratings along with the user in question. We decided to use Matrix Factorization to build a map of the user and the item (books in our case). One popular method to perform matrix factorization is SVD. However, SVD is best suited to handle incomplete data in the user-rating matrix. Therefore, we decided to use an alternative approach called Alternating Least square (ALS).  We first split the data into training and test sets, with the user_id, book_id, and rating as the features. We performed hyperparameter tuning on the following parameters to the ALS model: rank, max iterations, and regularization). We performed 5 fold cross validation using this parameter grid and fitted the model on the training data. The ALS model was then used to predict the ratings for books for each user in the test set (these books were assumed to be unread to evaluate the performance of the algorithm). The table in the result section displays the performance of our algorithm
-
-
 ## Results
 All the metrics resulted are evaluated on the test set.
 
@@ -99,6 +85,20 @@ The performance of the collaborative filtering algorithm is shown below
 
 Based on the tables shown above, we can see that the linear regression model is able to perform slightly better in terms of the RMSE. RMSE values close 0.35 is not bad considering the range of values for the possible rating (1-5). Moreover, the neural network we implemented was basic (1 hidden layer with limited number of hidden nodes). We plan to further improve on this by experimenting with the parameters and the structure of the network. Also, we plan to perform unsupervised learning, as mentioned in the proposal, to build recommendations for the user. 
 
+
+
+### Unsupervised Task - Recommendation System
+For the task of recommending books to users, we experimented with following two paradigms.
+
+   
+1. Content Based
+ In content-based filtering, we recommend new books based on user's previously read books. For this, we construct a TF-IDF matrix of size B x W where B is the number of books and W is number of words. From there, we compute a similarity factor
+between books x and y using cosine similarity. We then use these similarities to predict ratings of unread book according to the following formula and recommend them according to the predicted ratings.
+![](images/recommendation/calc.png)
+<br>
+
+2. Collaborative Filtering
+Collaborative filtering makes recommendations based on other users’ ratings along with the user in question. We decided to use Matrix Factorization to build a map of the user and the item (books in our case). One popular method to perform matrix factorization is SVD. However, SVD is best suited to handle incomplete data in the user-rating matrix. Therefore, we decided to use an alternative approach called Alternating Least square (ALS).  We first split the data into training and test sets, with the user_id, book_id, and rating as the features. We performed hyperparameter tuning on the following parameters to the ALS model: rank, max iterations, and regularization). We performed 5 fold cross validation using this parameter grid and fitted the model on the training data. The ALS model was then used to predict the ratings for books for each user in the test set (these books were assumed to be unread to evaluate the performance of the algorithm). The table in the result section displays the performance of our algorithm
 
 
 ![](images/recommendation/reco.png)
