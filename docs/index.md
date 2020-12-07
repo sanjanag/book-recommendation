@@ -76,13 +76,16 @@ All the metrics resulted are evaluated on the test set.
 Based on the tables shown above, we can see that the linear regression model is able to perform slightly better in terms of the RMSE. RMSE values close 0.35 is not bad considering the range of values for the possible rating (1-5). Moreover, the neural network we implemented was basic (1 hidden layer with limited number of hidden nodes). We plan to further improve on this by experimenting with the parameters and the structure of the network. Also, we plan to perform unsupervised learning, as mentioned in the proposal, to build recommendations for the user. 
 
 
+## Unsupervised Task - Book recommendation
 
-## Remaining part - To Do
+### Methods
 
-- **Unsupervised** <br>
-For the task of recommending books to users, we will be experimenting with unsupervised approaches in the following two paradigms.
+For the task of recommending books to users, we experimented with following two paradigms.
     1. **Content-based filtering** <br>
-Content-based filtering makes recommendations to users based on their preferences for content. For this, we’ll be modeling each book using a vector of TF-IDF features of the description of the book and check the similarity of a book with the user’s prior rated books and return recommendations based on the highest similarity.
+    In content-based filtering, we recommend new books based on user's previously read books. For this, we construct a TF-IDF matrix of size B x W where B is the number of books and W is number of words. From there, we compute a similarity factor
+between books x and y using cosine similarity. We then use these similarities to predict ratings of unread book according to the following formula and recommend them according to the predicted ratings.
+![](images/recommendation/calc.png)
+
     2. **Collaborative filtering** <br>
 Collaborative filtering makes recommendations based on other users’ ratings along with the user in question. We plan to use matrix factorization for this approach.
 
