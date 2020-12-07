@@ -108,9 +108,6 @@ We used Average RMSE as an evaluation metric, average acrossed users. The reason
 | Content-based filtering |  0.78 |
 | Collaborative filtering |  1.03 | 
 
-Following figure illustrates recommended books for one of our users.
-![](images/recommendation/reco.png)
-
 ### Discussion
 Based on the above results, we can see that content-based filtering performs better compared to collaborative filtering. This points to the case that for book recommendation previously read books are a stronger indicator than similar users. Also, we only have a 1000 users and since collaborative filtering relies on user book interactions, the data might not be sufficient to achieve good results. 
 
