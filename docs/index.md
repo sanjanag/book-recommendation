@@ -84,8 +84,6 @@ All the metrics resulted are evaluated on the test set.
 Based on the tables shown above, we can see that the linear regression model is able to perform slightly better in terms of the RMSE. RMSE values close 0.35 is not bad considering the range of values for the possible rating (1-5). Moreover, the neural network we implemented was basic (1 hidden layer with limited number of hidden nodes). After the midterm report, we took a more in-depth look on improving the performance of our neural network system. We tried different neural network structures with varying number of layers between 2-4 hidden layers. We also added more parameters, including is_ebook (a boolean) and square root of age and square root of number of pages. We also tuned the learning hyperparameter alpha and the total number of training epochs. Doing all these things resulted in an improvement in our Root Mean Squared Error Metric from 0.381 to 0.339.
 
 
-
-
 ## Unsupervised Task - Recommendation System
 For the task of recommending books to users, we experimented with following two paradigms.
 ### Data Collection
@@ -106,7 +104,7 @@ Collaborative filtering makes recommendations based on other users’ ratings al
 
 
 
-## Results
+### Results
 We used Average RMSE as an evaluation metric, average acrossed users. The reason for this is that the dataset is too sparse to get meaningful recall and precision values. Therefore, we chose RMSE for empirical evaluation and we will show qualitative results further below.
 
 | Model      | Avergae RMSE |
@@ -114,8 +112,19 @@ We used Average RMSE as an evaluation metric, average acrossed users. The reason
 | Content-based filtering |  0.78 |
 | Collaborative filtering |  1.03 | 
 
-
+Following figure illustrates recommended books for one of our users.
 ![](images/recommendation/reco.png)
+
+### Discussion
+Based on the above results, we can see that content-based filtering performs better compared to collaborative filtering. This points to the case that for book recommendation previously read books are a stronger indicator than similar users. Also, we only have a 1000 users and since collaborative filtering relies on user book interactions, the data might not be sufficient to achieve good results. 
+
+Following figure illustrates recommended books for one of our users using content-based filtering.
+![](images/recommendation/reco.png)
+We can observe from user's previously read books that the user is interested in children, fantasy and romance genre. The recommended books are indeed from the same genre with elements from read books. We could also recommend for each genre in future to make better recommendations. 
+
+
+
+
 ## References
 
 [1] Hsu PY., Shen YH., Xie XA. (2014) Predicting Movies User Ratings with Imdb Attributes. In: Miao D., Pedrycz W., Ślȩzak D., Peters G., Hu Q., Wang R. (eds) Rough Sets and Knowledge Technology. RSKT 2014. Lecture Notes in Computer Science, vol 8818. Springer, Cham.  <br>
