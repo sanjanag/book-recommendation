@@ -115,7 +115,11 @@ Following figure illustrates recommended books for one of our users using conten
 
 ![](images/recommendation/reco.png)
 
+Using User-based Collaborative Filtering, we are able to determine the similarities between users based on the books that the user has previously rated. From the anonymized dataset, we choose a random user who has had several book interactions, i.e. the user has rated a few books. We calculate the similarity score between all users that are closest to the given user using a Euclidean Distance metric. We get top 10 similar users and the top recommendations for the given user. The images below illustrate this: the first image shows the books that the user has already interacted with; and the second image shows the top recommendations for the user. We can see the similarity in the books that the user highly rated that are reflected in the suggestions.
 
+
+![](images/recommendation/original_user_interactions)
+![](images/recommendation/recommendations_for_user)
 
 
 ## References
