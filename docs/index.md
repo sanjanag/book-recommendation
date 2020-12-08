@@ -1,4 +1,5 @@
 
+
 # Book Recommendation System
 
 ## Introduction and Background
@@ -122,6 +123,10 @@ Previously interacted books (books that the user has rated)
 
 Recommendations for user based on collaborative filtering
 ![](images/recommendation/recommendations_for_user.png)
+
+## Conclusion
+
+The purpose of this project was to build a recommendation system to help users find books to read. The first step was to use supervised learning techniques to predict the average rating of the books. We used linear regression and neural networks to achieve this with relatively low RMSE values. We then built on this by experimenting with two different approaches for recommending books: content based and collaborative filtering. The benefits of using one over the other was highlighted in our experiments, as the content based filtering approach was able to perform better. We attribute this to the limited user-book interaction data we had, which is important to designing a robust collaborative filtering model. Our work could be extended by modifying the matrix factorization technique to use SVD instead of Alternating Least Square. Moreover, hybrid approaches combining content based and collaborative filtering could be explored to provide better recommendations. Overall, we were able to design a system capable of predicting ratings of books and recommending new books for users to read based on their prior reading list.  
 
 
 ## References
